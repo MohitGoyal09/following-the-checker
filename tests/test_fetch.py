@@ -84,7 +84,8 @@ def test_body_read_is_capped_before_parsing(monkeypatch):
     from sourced import fetch
 
     huge = b"<html><body>" + b"a" * (fetch.MAX_BODY_BYTES * 2) + b"</body></html>"
-    transport = httpx.MockTransport(lambda req: httpx.Response(200, headers={"content-type": "text/html"}, content=huge))
+    transport = httpx.MockTransport(lambda req: httpx.Response(200, headers={"content-type": "text/html"},
+                                                               stream=httpx.ByteStream(huge)))
     seen = {}
     monkeypatch.setattr(fetch.trafilatura, "extract", lambda html, **kw: seen.setdefault("n", len(html)) and "x" * 500)
 
@@ -95,3 +96,43 @@ def test_body_read_is_capped_before_parsing(monkeypatch):
     out = asyncio.run(go())
     assert seen["n"] <= fetch.MAX_BODY_BYTES
     assert out["state"] == "ok" and out["error"] is None
+
+
+def _serve(content: bytes, encoding: str | None):
+    import httpx
+
+    headers = {"content-type": "text/html", **({"content-encoding": encoding} if encoding else {})}
+    return httpx.MockTransport(lambda req: httpx.Response(200, headers=headers, stream=httpx.ByteStream(content)))
+
+
+def _fetch_with(transport, monkeypatch):
+    import asyncio
+
+    import httpx
+
+    from sourced import fetch
+
+    seen = {}
+    monkeypatch.setattr(fetch.trafilatura, "extract", lambda html, **kw: seen.setdefault("n", len(html)) and "x" * 500)
+
+    async def go():
+        async with httpx.AsyncClient(transport=transport) as client:
+            return await fetch.fetch_page(client, "https://example.org/p")
+
+    return asyncio.run(go()), seen
+
+
+def test_gzip_bomb_is_capped_after_bounded_inflation(monkeypatch):
+    import gzip
+
+    from sourced import fetch
+
+    bomb = gzip.compress(b"<html>" + b"\0" * (fetch.MAX_BODY_BYTES * 20))  # small on the wire, 100 MB inflated
+    out, seen = _fetch_with(_serve(bomb, "gzip"), monkeypatch)
+    assert seen["n"] <= fetch.MAX_BODY_BYTES and out["error"] is None
+
+
+def test_unsupported_or_stacked_encodings_are_refused(monkeypatch):
+    for enc in ("br", "gzip, gzip", "zstd"):
+        out, seen = _fetch_with(_serve(b"x", enc), monkeypatch)
+        assert out["state"] == "error" and out["error"] == "ValueError" and not seen

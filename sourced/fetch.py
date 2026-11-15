@@ -8,6 +8,7 @@ import asyncio
 import ipaddress
 import json
 import sys
+import zlib
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -20,6 +21,7 @@ MIN_TEXT_CHARS = 300  # below this a 200 page is treated as thin (paywall, JS sh
 MAX_TEXT_CHARS = 20_000
 MAX_BODY_BYTES = 5_000_000  # cap on the decompressed HTML read per URL (untrusted servers)
 DEADLINE_S = 45  # whole-request deadline per URL, redirects and body included
+ACCEPT_ENCODING = "gzip, deflate"  # only encodings we can decompress with a hard output limit
 CONCURRENCY = 16
 TIMEOUT_S = 20
 USER_AGENT = "Mozilla/5.0 (research link checker)"
@@ -79,6 +81,33 @@ def guarded_transport(limits: httpx.Limits) -> httpx.AsyncHTTPTransport:
     return transport
 
 
+async def read_capped(resp: httpx.Response, cap: int = MAX_BODY_BYTES) -> bytes:
+    """Read at most `cap` bytes of body, bounding memory before decompression (no zip bombs).
+
+    Raw bytes are read and inflated here with a hard output limit; stacked or unknown encodings are refused.
+    """
+    enc = resp.headers.get("content-encoding", "identity").strip().lower()
+    if enc in ("", "identity"):
+        inflater = None
+    elif enc in ("gzip", "x-gzip", "deflate"):
+        inflater = zlib.decompressobj(32 + zlib.MAX_WBITS)  # auto-detects gzip or zlib headers
+    else:
+        raise ValueError(f"unsupported content-encoding: {enc!r}")
+    out, raw = bytearray(), 0
+    async for chunk in resp.aiter_raw():
+        raw += len(chunk)
+        if inflater is None:
+            out += chunk[: cap - len(out)]
+        else:
+            buf = chunk
+            while buf and len(out) < cap:
+                out += inflater.decompress(buf, cap - len(out))
+                buf = inflater.unconsumed_tail
+        if len(out) >= cap or raw >= cap:
+            break
+    return bytes(out)
+
+
 def domain_of(url: str) -> str:
     host = (urlparse(url).hostname or "").lower()
     return host.removeprefix("www.")
@@ -112,18 +141,13 @@ async def fetch_page(client: httpx.AsyncClient, url: str, label_domain: str | No
                 "final_url": url, "error": None, "content_type": "", "text": ""}
     status, final_url, error, text, ctype = None, url, None, "", ""
     try:
-        async with asyncio.timeout(DEADLINE_S), client.stream("GET", url) as resp:
+        async with asyncio.timeout(DEADLINE_S), client.stream("GET", url, headers={"Accept-Encoding": ACCEPT_ENCODING}) as resp:
             status, final_url = resp.status_code, str(resp.url)
             ctype = resp.headers.get("content-type", "")
             if resp.status_code < 400 and "html" in ctype:
-                body = bytearray()
-                async for chunk in resp.aiter_bytes():  # decompressed bytes; stop at the cap
-                    body += chunk[: MAX_BODY_BYTES - len(body)]
-                    if len(body) >= MAX_BODY_BYTES:
-                        break
-                html = bytes(body).decode(resp.encoding or "utf-8", errors="replace")
+                html = (await read_capped(resp)).decode(resp.encoding or "utf-8", errors="replace")
                 text = trafilatura.extract(html, include_comments=False) or ""
-    except (httpx.HTTPError, ValueError, OSError, UnsafeURL) as exc:  # TimeoutError is an OSError
+    except (httpx.HTTPError, ValueError, OSError, UnsafeURL, zlib.error) as exc:  # TimeoutError is an OSError
         error = type(exc).__name__
     text = text[:MAX_TEXT_CHARS]
     return {"url": url, "domain": label_domain or domain_of(final_url),
@@ -138,7 +162,7 @@ async def _fetch_one(client: httpx.AsyncClient, url: str) -> dict:
 def make_client() -> httpx.AsyncClient:
     limits = httpx.Limits(max_connections=CONCURRENCY)
     return httpx.AsyncClient(follow_redirects=True, timeout=TIMEOUT_S, transport=guarded_transport(limits),
-                             headers={"User-Agent": USER_AGENT}, event_hooks={"request": [guard_request]})
+                             headers={"User-Agent": USER_AGENT, "Accept-Encoding": ACCEPT_ENCODING}, event_hooks={"request": [guard_request]})
 
 
 async def fetch_all(urls: list[str], out_path: Path) -> None:
