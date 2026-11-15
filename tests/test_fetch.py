@@ -74,3 +74,24 @@ def test_pdfs_are_their_own_state():
 def test_similar_looking_domains_are_not_media():
     assert classify(200, 5000, None, "notyoutube.com") == "ok"
     assert classify(200, 5000, None, "box.com") == "ok"
+
+
+def test_body_read_is_capped_before_parsing(monkeypatch):
+    import asyncio
+
+    import httpx
+
+    from sourced import fetch
+
+    huge = b"<html><body>" + b"a" * (fetch.MAX_BODY_BYTES * 2) + b"</body></html>"
+    transport = httpx.MockTransport(lambda req: httpx.Response(200, headers={"content-type": "text/html"}, content=huge))
+    seen = {}
+    monkeypatch.setattr(fetch.trafilatura, "extract", lambda html, **kw: seen.setdefault("n", len(html)) and "x" * 500)
+
+    async def go():
+        async with httpx.AsyncClient(transport=transport) as client:
+            return await fetch.fetch_page(client, "https://example.org/big")
+
+    out = asyncio.run(go())
+    assert seen["n"] <= fetch.MAX_BODY_BYTES
+    assert out["state"] == "ok" and out["error"] is None

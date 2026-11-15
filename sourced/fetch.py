@@ -18,6 +18,8 @@ import trafilatura
 
 MIN_TEXT_CHARS = 300  # below this a 200 page is treated as thin (paywall, JS shell, cookie wall)
 MAX_TEXT_CHARS = 20_000
+MAX_BODY_BYTES = 5_000_000  # cap on the decompressed HTML read per URL (untrusted servers)
+DEADLINE_S = 45  # whole-request deadline per URL, redirects and body included
 CONCURRENCY = 16
 TIMEOUT_S = 20
 USER_AGENT = "Mozilla/5.0 (research link checker)"
@@ -110,12 +112,18 @@ async def fetch_page(client: httpx.AsyncClient, url: str, label_domain: str | No
                 "final_url": url, "error": None, "content_type": "", "text": ""}
     status, final_url, error, text, ctype = None, url, None, "", ""
     try:
-        resp = await client.get(url)
-        status, final_url = resp.status_code, str(resp.url)
-        ctype = resp.headers.get("content-type", "")
-        if resp.status_code < 400 and "html" in ctype:
-            text = trafilatura.extract(resp.text, include_comments=False) or ""
-    except (httpx.HTTPError, ValueError, OSError, UnsafeURL) as exc:
+        async with asyncio.timeout(DEADLINE_S), client.stream("GET", url) as resp:
+            status, final_url = resp.status_code, str(resp.url)
+            ctype = resp.headers.get("content-type", "")
+            if resp.status_code < 400 and "html" in ctype:
+                body = bytearray()
+                async for chunk in resp.aiter_bytes():  # decompressed bytes; stop at the cap
+                    body += chunk[: MAX_BODY_BYTES - len(body)]
+                    if len(body) >= MAX_BODY_BYTES:
+                        break
+                html = bytes(body).decode(resp.encoding or "utf-8", errors="replace")
+                text = trafilatura.extract(html, include_comments=False) or ""
+    except (httpx.HTTPError, ValueError, OSError, UnsafeURL) as exc:  # TimeoutError is an OSError
         error = type(exc).__name__
     text = text[:MAX_TEXT_CHARS]
     return {"url": url, "domain": label_domain or domain_of(final_url),
