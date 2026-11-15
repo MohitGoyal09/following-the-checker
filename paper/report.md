@@ -1,4 +1,4 @@
-# Following the Checker: How AI Readers Use Source-Check Verdicts on Community Notes
+# False Assurance: How AI Readers Use Source-Check Verdicts on Community Notes
 
 **Mohit Goyal** · **Ananya Bhattacharya**
 With Apart Research. Research conducted at the [AI x Epistemics Research Sprint](https://apartresearch.com/sprints/ai-x-epistemics-research-sprint-2026-11-13-to-2026-11-15), November 2026. Tracks: 2, Trust Infrastructure (primary); 4, Open.
