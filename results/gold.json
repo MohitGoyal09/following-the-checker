@@ -1,0 +1,295 @@
+{
+  "inter_author_shared20": {
+    "labels": {
+      "kappa": 0.625,
+      "ci95": [
+        0.333,
+        0.851
+      ],
+      "n": 20,
+      "agree": 0.75
+    },
+    "binary_supports": {
+      "kappa": 0.794,
+      "ci95": [
+        0.494,
+        1.0
+      ],
+      "n": 20,
+      "agree": 0.9
+    },
+    "confusion": {
+      "partial": {
+        "partial": 4,
+        "silent": 2,
+        "supports": 2
+      },
+      "silent": {
+        "partial": 1,
+        "silent": 4,
+        "supports": 0
+      },
+      "supports": {
+        "partial": 0,
+        "silent": 0,
+        "supports": 7
+      }
+    }
+  },
+  "gold_counts": {
+    "supports": 24,
+    "silent": 13,
+    "partial": 13
+  },
+  "judges": {
+    "claude-opus-5-5": {
+      "all": {
+        "kappa": 0.637,
+        "ci95": [
+          0.446,
+          0.807
+        ],
+        "n": 50,
+        "agree": 0.76
+      },
+      "binary_supports": {
+        "kappa": 0.676,
+        "ci95": [
+          0.463,
+          0.872
+        ],
+        "n": 50,
+        "agree": 0.84
+      },
+      "human": {
+        "kappa": 0.633,
+        "ci95": [
+          0.352,
+          0.874
+        ],
+        "n": 25,
+        "agree": 0.76
+      },
+      "ai": {
+        "kappa": 0.646,
+        "ci95": [
+          0.402,
+          0.875
+        ],
+        "n": 25,
+        "agree": 0.76
+      },
+      "confusion": {
+        "partial": {
+          "partial": 10,
+          "silent": 2,
+          "supports": 1
+        },
+        "silent": {
+          "partial": 2,
+          "silent": 11,
+          "supports": 0
+        },
+        "supports": {
+          "partial": 7,
+          "silent": 0,
+          "supports": 17
+        }
+      },
+      "alt_test_shared20": {
+        "mohit": {
+          "llm_align": 0.75,
+          "human_align": 0.75,
+          "p": 0.0
+        },
+        "ananya": {
+          "llm_align": 1.0,
+          "human_align": 0.75,
+          "p": 0.0001
+        },
+        "winning_rate": 1.0
+      }
+    },
+    "gemini-3.8-flash": {
+      "all": {
+        "kappa": 0.564,
+        "ci95": [
+          0.385,
+          0.732
+        ],
+        "n": 50,
+        "agree": 0.7
+      },
+      "binary_supports": {
+        "kappa": 0.551,
+        "ci95": [
+          0.337,
+          0.76
+        ],
+        "n": 50,
+        "agree": 0.78
+      },
+      "human": {
+        "kappa": 0.582,
+        "ci95": [
+          0.313,
+          0.818
+        ],
+        "n": 25,
+        "agree": 0.72
+      },
+      "ai": {
+        "kappa": 0.544,
+        "ci95": [
+          0.309,
+          0.766
+        ],
+        "n": 25,
+        "agree": 0.68
+      },
+      "confusion": {
+        "partial": {
+          "contradicts": 0,
+          "partial": 12,
+          "silent": 1,
+          "supports": 0
+        },
+        "silent": {
+          "contradicts": 1,
+          "partial": 2,
+          "silent": 10,
+          "supports": 0
+        },
+        "supports": {
+          "contradicts": 0,
+          "partial": 11,
+          "silent": 0,
+          "supports": 13
+        }
+      },
+      "alt_test_shared20": {
+        "mohit": {
+          "llm_align": 0.65,
+          "human_align": 0.75,
+          "p": 0.0813
+        },
+        "ananya": {
+          "llm_align": 0.9,
+          "human_align": 0.75,
+          "p": 0.0076
+        },
+        "winning_rate": 0.5
+      }
+    },
+    "primary_judge": "claude-opus-5-5",
+    "primary_passes_bar_0.6": true
+  },
+  "claims": {
+    "n": 50,
+    "incorrect": 1,
+    "error_rate_by_writer": {
+      "human": 0.0,
+      "ai": 0.04
+    }
+  },
+  "passages": {
+    "labels_by_stratum_truth": {
+      "other|supported": {
+        "partial": 1,
+        "silent": 0,
+        "supports": 7
+      },
+      "other|unsupported": {
+        "partial": 0,
+        "silent": 2,
+        "supports": 0
+      },
+      "partial|supported": {
+        "partial": 1,
+        "silent": 0,
+        "supports": 0
+      },
+      "partial|unsupported": {
+        "partial": 16,
+        "silent": 1,
+        "supports": 3
+      }
+    },
+    "unsupported_partial_n": 20,
+    "unsupported_partial_human_supports_share": 0.15,
+    "unsupported_reliance_ef_by_human_label": {
+      "claude-haiku-5-5|e|partial": {
+        "mean": 0.688,
+        "size": 16
+      },
+      "claude-haiku-5-5|e|silent": {
+        "mean": 0.333,
+        "size": 3
+      },
+      "claude-haiku-5-5|e|supports": {
+        "mean": 0.667,
+        "size": 3
+      },
+      "claude-haiku-5-5|f|partial": {
+        "mean": 0.938,
+        "size": 16
+      },
+      "claude-haiku-5-5|f|silent": {
+        "mean": 0.667,
+        "size": 3
+      },
+      "claude-haiku-5-5|f|supports": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "claude-opus-5-5|e|partial": {
+        "mean": 0.938,
+        "size": 16
+      },
+      "claude-opus-5-5|e|silent": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "claude-opus-5-5|e|supports": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "claude-opus-5-5|f|partial": {
+        "mean": 1.0,
+        "size": 16
+      },
+      "claude-opus-5-5|f|silent": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "claude-opus-5-5|f|supports": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "gemini-3.8-flash|e|partial": {
+        "mean": 0.5,
+        "size": 16
+      },
+      "gemini-3.8-flash|e|silent": {
+        "mean": 0.667,
+        "size": 3
+      },
+      "gemini-3.8-flash|e|supports": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "gemini-3.8-flash|f|partial": {
+        "mean": 0.938,
+        "size": 16
+      },
+      "gemini-3.8-flash|f|silent": {
+        "mean": 1.0,
+        "size": 3
+      },
+      "gemini-3.8-flash|f|supports": {
+        "mean": 1.0,
+        "size": 3
+      }
+    }
+  }
+}

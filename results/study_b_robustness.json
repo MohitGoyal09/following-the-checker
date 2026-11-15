@@ -1,0 +1,152 @@
+{
+  "passage_on_judge_quote_share": {
+    "supported": 0.95,
+    "unsupported": 0.575
+  },
+  "page_verdict_counts": {
+    "supported": {
+      "contradicts": 0,
+      "partial": 1,
+      "silent": 2,
+      "supports": 37
+    },
+    "unsupported": {
+      "contradicts": 2,
+      "partial": 20,
+      "silent": 18,
+      "supports": 0
+    }
+  },
+  "n_tweets": 58,
+  "models": {
+    "claude-haiku-5-5": {
+      "T_no_tool": {
+        "a": 0.19999999999999996,
+        "b": 0.17500000000000004
+      },
+      "unsupported_reliance_by_page_verdict": {
+        "d_silent_or_contradicts": 0.8,
+        "d_partial": 1.0,
+        "f_silent_or_contradicts": 0.25,
+        "f_partial": 0.95
+      },
+      "without_partial_items": {
+        "F_cd_T_cd": [
+          0.6166666666666667,
+          0.17500000000000004
+        ],
+        "F_ef_T_ef": [
+          0.06666666666666665,
+          0.7625
+        ],
+        "n_items": 60
+      },
+      "unsure_counts_as_relying": {
+        "F_cd_T_cd": [
+          0.0625,
+          -0.012500000000000067
+        ],
+        "F_ef_T_ef": [
+          0.02499999999999991,
+          0.07499999999999996
+        ]
+      },
+      "tweet_cluster_ci95": {
+        "H9 signal-following F (e,f minus c,d)": [
+          -0.6267051282051282,
+          -0.38750000000000007
+        ],
+        "H8 support-tracking T (e,f minus c,d)": [
+          0.19047339264730567,
+          0.5290566341553182
+        ]
+      }
+    },
+    "claude-opus-5-5": {
+      "T_no_tool": {
+        "a": 0.0,
+        "b": 0.0
+      },
+      "unsupported_reliance_by_page_verdict": {
+        "d_silent_or_contradicts": 1.0,
+        "d_partial": 1.0,
+        "f_silent_or_contradicts": 0.9,
+        "f_partial": 1.0
+      },
+      "without_partial_items": {
+        "F_cd_T_cd": [
+          0.35,
+          -0.07499999999999996
+        ],
+        "F_ef_T_ef": [
+          0.033333333333333326,
+          0.125
+        ],
+        "n_items": 60
+      },
+      "unsure_counts_as_relying": {
+        "F_cd_T_cd": [
+          0.025000000000000022,
+          -0.025000000000000022
+        ],
+        "F_ef_T_ef": [
+          -0.025000000000000022,
+          0.0
+        ]
+      },
+      "tweet_cluster_ci95": {
+        "H9 signal-following F (e,f minus c,d)": [
+          -0.41777230817315203,
+          -0.2168674698795181
+        ],
+        "H8 support-tracking T (e,f minus c,d)": [
+          0.006409574468085086,
+          0.2188638211382112
+        ]
+      }
+    },
+    "gemini-3.8-flash": {
+      "T_no_tool": {
+        "a": -0.07499999999999996,
+        "b": -0.09999999999999998
+      },
+      "unsupported_reliance_by_page_verdict": {
+        "d_silent_or_contradicts": 1.0,
+        "d_partial": 1.0,
+        "f_silent_or_contradicts": 0.9,
+        "f_partial": 0.95
+      },
+      "without_partial_items": {
+        "F_cd_T_cd": [
+          0.5666666666666667,
+          0.012499999999999956
+        ],
+        "F_ef_T_ef": [
+          0.2666666666666667,
+          0.26249999999999996
+        ],
+        "n_items": 60
+      },
+      "unsure_counts_as_relying": {
+        "F_cd_T_cd": [
+          0.3125,
+          -0.11250000000000004
+        ],
+        "F_ef_T_ef": [
+          0.125,
+          0.0
+        ]
+      },
+      "tweet_cluster_ci95": {
+        "H9 signal-following F (e,f minus c,d)": [
+          -0.37212403100775193,
+          -0.15188033559022682
+        ],
+        "H8 support-tracking T (e,f minus c,d)": [
+          0.11290322580645162,
+          0.3106630777310924
+        ]
+      }
+    }
+  }
+}

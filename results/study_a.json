@@ -1,0 +1,1115 @@
+{
+  "primary_judge": "claude-opus-5-5",
+  "judges": {
+    "claude-opus-5-5": {
+      "descriptive": {
+        "links_per_note": {
+          "false": 1.127,
+          "true": 2.073
+        },
+        "judged_links_per_note": {
+          "false": 0.6,
+          "true": 1.347
+        },
+        "share_notes_no_link": {
+          "false": 0.153,
+          "true": 0.0
+        },
+        "share_notes_unjudgeable": {
+          "false": 0.513,
+          "true": 0.22
+        },
+        "live_state_share": {
+          "false": {
+            "blocked": 0.13,
+            "dead": 0.036,
+            "error": 0.0,
+            "media": 0.053,
+            "ok": 0.503,
+            "pdf": 0.0,
+            "thin": 0.071,
+            "x_post": 0.207
+          },
+          "true": {
+            "blocked": 0.135,
+            "dead": 0.029,
+            "error": 0.013,
+            "media": 0.093,
+            "ok": 0.592,
+            "pdf": 0.01,
+            "thin": 0.019,
+            "x_post": 0.109
+          }
+        },
+        "archive_coverage_judged": {
+          "false": 0.367,
+          "true": 0.535
+        },
+        "writers": {
+          "ai": 22,
+          "human": 146,
+          "top3_ai_writer_share_of_ai_notes": 0.367
+        }
+      },
+      "H1_C1": {
+        "link_level_unsupported": {
+          "all": {
+            "est": 0.6822,
+            "ci95": [
+              0.6009,
+              0.7607
+            ]
+          },
+          "ai": {
+            "est": 0.7007,
+            "ci95": [
+              0.592,
+              0.8101
+            ]
+          },
+          "human": {
+            "est": 0.6494,
+            "ci95": [
+              0.5301,
+              0.7705
+            ]
+          },
+          "ai_minus_human": {
+            "est": 0.0514,
+            "ci95": [
+              -0.1113,
+              0.2151
+            ]
+          }
+        },
+        "note_level_unsupported": {
+          "all": {
+            "est": 0.6115,
+            "ci95": [
+              0.5108,
+              0.7143
+            ]
+          },
+          "ai": {
+            "est": 0.5897,
+            "ci95": [
+              0.4348,
+              0.7451
+            ]
+          },
+          "human": {
+            "est": 0.6393,
+            "ci95": [
+              0.5156,
+              0.7586
+            ]
+          },
+          "ai_minus_human": {
+            "est": -0.0496,
+            "ci95": [
+              -0.2481,
+              0.1455
+            ]
+          }
+        },
+        "note_level_bounds_unjudgeable": {
+          "all": {
+            "as_supported": 0.425,
+            "as_unsupported": 0.73
+          },
+          "ai": {
+            "as_supported": 0.46,
+            "as_unsupported": 0.68
+          },
+          "human": {
+            "as_supported": 0.39,
+            "as_unsupported": 0.78
+          }
+        },
+        "n_notes": 200,
+        "n_judgeable_notes": {
+          "ai": 78,
+          "human": 61
+        },
+        "n_judged_links": {
+          "ai": 137,
+          "human": 77
+        },
+        "mcnemar_pairs_both_judgeable": {
+          "n_pairs": 55,
+          "ai_unsup_only": 7,
+          "human_unsup_only": 12,
+          "p_exact": 0.3593
+        },
+        "logit_unsupported_ai_nlinks": {
+          "Intercept": {
+            "coef": 1.262,
+            "ci95": [
+              0.592,
+              1.932
+            ],
+            "p": 0.0002
+          },
+          "ai": {
+            "coef": 0.059,
+            "ci95": [
+              -0.696,
+              0.815
+            ],
+            "p": 0.878
+          },
+          "n_judged": {
+            "coef": -0.54,
+            "ci95": [
+              -0.905,
+              -0.174
+            ],
+            "p": 0.0038
+          },
+          "n": 139
+        }
+      },
+      "H7": {
+        "all": {
+          "n_links": 359,
+          "live_pass_rate": 0.6323,
+          "n_live": 227,
+          "live_not_supports": 0.7004,
+          "live_breakdown": {
+            "partial": 0.4009,
+            "supports": 0.2996,
+            "silent": 0.2203,
+            "no usable text": 0.0573,
+            "contradicts": 0.022
+          }
+        },
+        "ai": {
+          "n_links": 222,
+          "live_pass_rate": 0.6351,
+          "n_live": 141,
+          "live_not_supports": 0.7092,
+          "live_breakdown": {
+            "partial": 0.4397,
+            "supports": 0.2908,
+            "silent": 0.2199,
+            "no usable text": 0.0284,
+            "contradicts": 0.0213
+          }
+        },
+        "human": {
+          "n_links": 137,
+          "live_pass_rate": 0.6277,
+          "n_live": 86,
+          "live_not_supports": 0.686,
+          "live_breakdown": {
+            "partial": 0.3372,
+            "supports": 0.314,
+            "silent": 0.2209,
+            "no usable text": 0.1047,
+            "contradicts": 0.0233
+          }
+        }
+      },
+      "C2": {
+        "ai": {
+          "gate1_live_pass": {
+            "est": 0.6351,
+            "ci95": [
+              0.5366,
+              0.7368
+            ]
+          },
+          "gate2_good_sources_tag": {
+            "est": 0.5838,
+            "ci95": [
+              0.5507,
+              0.6142
+            ]
+          },
+          "checked_support": {
+            "est": 0.2993,
+            "ci95": [
+              0.1899,
+              0.408
+            ]
+          }
+        },
+        "human": {
+          "gate1_live_pass": {
+            "est": 0.6277,
+            "ci95": [
+              0.5256,
+              0.7206
+            ]
+          },
+          "gate2_good_sources_tag": {
+            "est": 0.5558,
+            "ci95": [
+              0.531,
+              0.5808
+            ]
+          },
+          "checked_support": {
+            "est": 0.3506,
+            "ci95": [
+              0.2295,
+              0.4699
+            ]
+          }
+        }
+      },
+      "H6": {
+        "n_notes": 189,
+        "spearman_good_sources_vs_support": {
+          "est": 0.1564,
+          "ci95": [
+            -0.0227,
+            0.3233
+          ]
+        },
+        "spearman_sources_missing_vs_support": {
+          "est": 0.0539,
+          "ci95": [
+            -0.1068,
+            0.2117
+          ]
+        },
+        "logit_supported_tags_ai": {
+          "Intercept": {
+            "coef": -1.575,
+            "ci95": [
+              -3.031,
+              -0.119
+            ],
+            "p": 0.034
+          },
+          "good_sources_share": {
+            "coef": 1.63,
+            "ci95": [
+              -0.739,
+              3.999
+            ],
+            "p": 0.1774
+          },
+          "ai": {
+            "coef": 0.329,
+            "ci95": [
+              -0.23,
+              0.888
+            ],
+            "p": 0.2484
+          },
+          "n": 189
+        }
+      },
+      "H3_C3": {
+        "link_level_unsupported": {
+          "crh": {
+            "all": {
+              "est": 0.6822,
+              "ci95": [
+                0.6009,
+                0.7607
+              ]
+            },
+            "ai": {
+              "est": 0.7007,
+              "ci95": [
+                0.592,
+                0.8101
+              ]
+            },
+            "human": {
+              "est": 0.6494,
+              "ci95": [
+                0.5301,
+                0.7705
+              ]
+            },
+            "ai_minus_human": {
+              "est": 0.0514,
+              "ci95": [
+                -0.1113,
+                0.2151
+              ]
+            }
+          },
+          "crnh": {
+            "all": {
+              "est": 0.7179,
+              "ci95": [
+                0.5972,
+                0.8171
+              ]
+            },
+            "ai": {
+              "est": 0.7077,
+              "ci95": [
+                0.5581,
+                0.8214
+              ]
+            },
+            "human": {
+              "est": 0.7692,
+              "ci95": [
+                0.5455,
+                1.0
+              ]
+            },
+            "ai_minus_human": {
+              "est": -0.0615,
+              "ci95": [
+                -0.32,
+                0.1859
+              ]
+            }
+          }
+        },
+        "crh_minus_crnh_link_level": {
+          "est": -0.0357,
+          "ci95": [
+            -0.1707,
+            0.1182
+          ]
+        },
+        "note_level_unsupported": {
+          "crh": 0.6115,
+          "crnh": 0.6078
+        },
+        "logit_unsupported_status_ai": {
+          "Intercept": {
+            "coef": 1.721,
+            "ci95": [
+              0.404,
+              3.038
+            ],
+            "p": 0.0104
+          },
+          "crh": {
+            "coef": -0.421,
+            "ci95": [
+              -1.804,
+              0.962
+            ],
+            "p": 0.5505
+          },
+          "ai": {
+            "coef": -0.507,
+            "ci95": [
+              -1.944,
+              0.93
+            ],
+            "p": 0.489
+          },
+          "crh:ai": {
+            "coef": 0.581,
+            "ci95": [
+              -1.064,
+              2.226
+            ],
+            "p": 0.4888
+          },
+          "n_judged": {
+            "coef": -0.569,
+            "ci95": [
+              -0.881,
+              -0.257
+            ],
+            "p": 0.0004
+          },
+          "n": 190
+        }
+      },
+      "C4": {
+        "W1": {
+          "n_notes": 15,
+          "n_links": 28,
+          "link_supported": 0.3571
+        },
+        "W2": {
+          "n_notes": 9,
+          "n_links": 15,
+          "link_supported": 0.3333
+        },
+        "W3": {
+          "n_notes": 12,
+          "n_links": 21,
+          "link_supported": 0.3333
+        },
+        "W4": {
+          "n_notes": 14,
+          "n_links": 25,
+          "link_supported": 0.32
+        },
+        "W5": {
+          "n_notes": 15,
+          "n_links": 24,
+          "link_supported": 0.2917
+        },
+        "W6": {
+          "n_notes": 12,
+          "n_links": 22,
+          "link_supported": 0.2273
+        },
+        "W7": {
+          "n_notes": 12,
+          "n_links": 23,
+          "link_supported": 0.2174
+        },
+        "W8": {
+          "n_notes": 10,
+          "n_links": 20,
+          "link_supported": 0.2
+        },
+        "scope": "all strata, judgeable AI notes, writers with >=5"
+      },
+      "C5": {
+        "early": {
+          "n_ai_notes": 29,
+          "ai": {
+            "est": 0.7222,
+            "ci95": [
+              0.4667,
+              0.8947
+            ]
+          },
+          "human": {
+            "est": 0.625,
+            "ci95": [
+              0.3846,
+              0.8571
+            ]
+          }
+        },
+        "late": {
+          "n_ai_notes": 46,
+          "ai": {
+            "est": 0.65,
+            "ci95": [
+              0.4853,
+              0.8214
+            ]
+          },
+          "human": {
+            "est": 0.675,
+            "ci95": [
+              0.5,
+              0.84
+            ]
+          }
+        }
+      },
+      "C6": {
+        "english": {
+          "est": 0.7023,
+          "ci95": [
+            0.622,
+            0.7753
+          ]
+        },
+        "non_english": {
+          "est": 0.6623,
+          "ci95": [
+            0.5402,
+            0.78
+          ]
+        },
+        "n": {
+          "en": 235,
+          "other": 65
+        }
+      },
+      "sensitivity_archived_only": {
+        "link_level_unsupported": {
+          "all": {
+            "est": 0.6022,
+            "ci95": [
+              0.4545,
+              0.7353
+            ]
+          },
+          "ai": {
+            "est": 0.6462,
+            "ci95": [
+              0.459,
+              0.8077
+            ]
+          },
+          "human": {
+            "est": 0.5,
+            "ci95": [
+              0.28,
+              0.7368
+            ]
+          },
+          "ai_minus_human": {
+            "est": 0.1462,
+            "ci95": [
+              -0.1495,
+              0.4267
+            ]
+          }
+        },
+        "n_judged_links": {
+          "ai": 65,
+          "human": 28
+        }
+      }
+    },
+    "gemini-3.8-flash": {
+      "descriptive": {
+        "links_per_note": {
+          "false": 1.127,
+          "true": 2.073
+        },
+        "judged_links_per_note": {
+          "false": 0.6,
+          "true": 1.347
+        },
+        "share_notes_no_link": {
+          "false": 0.153,
+          "true": 0.0
+        },
+        "share_notes_unjudgeable": {
+          "false": 0.513,
+          "true": 0.22
+        },
+        "live_state_share": {
+          "false": {
+            "blocked": 0.13,
+            "dead": 0.036,
+            "error": 0.0,
+            "media": 0.053,
+            "ok": 0.503,
+            "pdf": 0.0,
+            "thin": 0.071,
+            "x_post": 0.207
+          },
+          "true": {
+            "blocked": 0.135,
+            "dead": 0.029,
+            "error": 0.013,
+            "media": 0.093,
+            "ok": 0.592,
+            "pdf": 0.01,
+            "thin": 0.019,
+            "x_post": 0.109
+          }
+        },
+        "archive_coverage_judged": {
+          "false": 0.367,
+          "true": 0.535
+        },
+        "writers": {
+          "ai": 22,
+          "human": 146,
+          "top3_ai_writer_share_of_ai_notes": 0.367
+        }
+      },
+      "H1_C1": {
+        "link_level_unsupported": {
+          "all": {
+            "est": 0.7757,
+            "ci95": [
+              0.7024,
+              0.8434
+            ]
+          },
+          "ai": {
+            "est": 0.781,
+            "ci95": [
+              0.6791,
+              0.875
+            ]
+          },
+          "human": {
+            "est": 0.7662,
+            "ci95": [
+              0.6667,
+              0.8611
+            ]
+          },
+          "ai_minus_human": {
+            "est": 0.0148,
+            "ci95": [
+              -0.1262,
+              0.1523
+            ]
+          }
+        },
+        "note_level_unsupported": {
+          "all": {
+            "est": 0.705,
+            "ci95": [
+              0.6147,
+              0.7935
+            ]
+          },
+          "ai": {
+            "est": 0.6795,
+            "ci95": [
+              0.5455,
+              0.8125
+            ]
+          },
+          "human": {
+            "est": 0.7377,
+            "ci95": [
+              0.625,
+              0.8462
+            ]
+          },
+          "ai_minus_human": {
+            "est": -0.0582,
+            "ci95": [
+              -0.2334,
+              0.1212
+            ]
+          }
+        },
+        "note_level_bounds_unjudgeable": {
+          "all": {
+            "as_supported": 0.49,
+            "as_unsupported": 0.795
+          },
+          "ai": {
+            "as_supported": 0.53,
+            "as_unsupported": 0.75
+          },
+          "human": {
+            "as_supported": 0.45,
+            "as_unsupported": 0.84
+          }
+        },
+        "n_notes": 200,
+        "n_judgeable_notes": {
+          "ai": 78,
+          "human": 61
+        },
+        "n_judged_links": {
+          "ai": 137,
+          "human": 77
+        },
+        "mcnemar_pairs_both_judgeable": {
+          "n_pairs": 55,
+          "ai_unsup_only": 5,
+          "human_unsup_only": 11,
+          "p_exact": 0.2101
+        },
+        "logit_unsupported_ai_nlinks": {
+          "Intercept": {
+            "coef": 1.693,
+            "ci95": [
+              0.824,
+              2.563
+            ],
+            "p": 0.0001
+          },
+          "ai": {
+            "coef": -0.021,
+            "ci95": [
+              -0.827,
+              0.785
+            ],
+            "p": 0.959
+          },
+          "n_judged": {
+            "coef": -0.509,
+            "ci95": [
+              -1.068,
+              0.05
+            ],
+            "p": 0.0741
+          },
+          "n": 139
+        }
+      },
+      "H7": {
+        "all": {
+          "n_links": 359,
+          "live_pass_rate": 0.6323,
+          "n_live": 227,
+          "live_not_supports": 0.7885,
+          "live_breakdown": {
+            "partial": 0.4581,
+            "silent": 0.2379,
+            "supports": 0.2115,
+            "no usable text": 0.0573,
+            "contradicts": 0.0352
+          }
+        },
+        "ai": {
+          "n_links": 222,
+          "live_pass_rate": 0.6351,
+          "n_live": 141,
+          "live_not_supports": 0.7872,
+          "live_breakdown": {
+            "partial": 0.4965,
+            "silent": 0.2199,
+            "supports": 0.2128,
+            "contradicts": 0.0426,
+            "no usable text": 0.0284
+          }
+        },
+        "human": {
+          "n_links": 137,
+          "live_pass_rate": 0.6277,
+          "n_live": 86,
+          "live_not_supports": 0.7907,
+          "live_breakdown": {
+            "partial": 0.3953,
+            "silent": 0.2674,
+            "supports": 0.2093,
+            "no usable text": 0.1047,
+            "contradicts": 0.0233
+          }
+        }
+      },
+      "C2": {
+        "ai": {
+          "gate1_live_pass": {
+            "est": 0.6351,
+            "ci95": [
+              0.5366,
+              0.7368
+            ]
+          },
+          "gate2_good_sources_tag": {
+            "est": 0.5838,
+            "ci95": [
+              0.5507,
+              0.6142
+            ]
+          },
+          "checked_support": {
+            "est": 0.219,
+            "ci95": [
+              0.125,
+              0.3209
+            ]
+          }
+        },
+        "human": {
+          "gate1_live_pass": {
+            "est": 0.6277,
+            "ci95": [
+              0.5256,
+              0.7206
+            ]
+          },
+          "gate2_good_sources_tag": {
+            "est": 0.5558,
+            "ci95": [
+              0.531,
+              0.5808
+            ]
+          },
+          "checked_support": {
+            "est": 0.2338,
+            "ci95": [
+              0.1389,
+              0.3333
+            ]
+          }
+        }
+      },
+      "H6": {
+        "n_notes": 189,
+        "spearman_good_sources_vs_support": {
+          "est": 0.1339,
+          "ci95": [
+            -0.0387,
+            0.2968
+          ]
+        },
+        "spearman_sources_missing_vs_support": {
+          "est": 0.0147,
+          "ci95": [
+            -0.1477,
+            0.1794
+          ]
+        },
+        "logit_supported_tags_ai": {
+          "Intercept": {
+            "coef": -1.47,
+            "ci95": [
+              -2.747,
+              -0.194
+            ],
+            "p": 0.0239
+          },
+          "good_sources_share": {
+            "coef": 0.755,
+            "ci95": [
+              -1.294,
+              2.804
+            ],
+            "p": 0.4702
+          },
+          "ai": {
+            "coef": 0.319,
+            "ci95": [
+              -0.308,
+              0.947
+            ],
+            "p": 0.3186
+          },
+          "n": 189
+        }
+      },
+      "H3_C3": {
+        "link_level_unsupported": {
+          "crh": {
+            "all": {
+              "est": 0.7757,
+              "ci95": [
+                0.7024,
+                0.8434
+              ]
+            },
+            "ai": {
+              "est": 0.781,
+              "ci95": [
+                0.6791,
+                0.875
+              ]
+            },
+            "human": {
+              "est": 0.7662,
+              "ci95": [
+                0.6667,
+                0.8611
+              ]
+            },
+            "ai_minus_human": {
+              "est": 0.0148,
+              "ci95": [
+                -0.1262,
+                0.1523
+              ]
+            }
+          },
+          "crnh": {
+            "all": {
+              "est": 0.7821,
+              "ci95": [
+                0.6557,
+                0.8857
+              ]
+            },
+            "ai": {
+              "est": 0.7846,
+              "ci95": [
+                0.6364,
+                0.9032
+              ]
+            },
+            "human": {
+              "est": 0.7692,
+              "ci95": [
+                0.5455,
+                1.0
+              ]
+            },
+            "ai_minus_human": {
+              "est": 0.0154,
+              "ci95": [
+                -0.2381,
+                0.2647
+              ]
+            }
+          }
+        },
+        "crh_minus_crnh_link_level": {
+          "est": -0.0064,
+          "ci95": [
+            -0.1263,
+            0.1428
+          ]
+        },
+        "note_level_unsupported": {
+          "crh": 0.705,
+          "crnh": 0.6863
+        },
+        "logit_unsupported_status_ai": {
+          "Intercept": {
+            "coef": 1.634,
+            "ci95": [
+              0.25,
+              3.019
+            ],
+            "p": 0.0207
+          },
+          "crh": {
+            "coef": 0.034,
+            "ci95": [
+              -1.368,
+              1.437
+            ],
+            "p": 0.9621
+          },
+          "ai": {
+            "coef": -0.104,
+            "ci95": [
+              -1.558,
+              1.35
+            ],
+            "p": 0.8883
+          },
+          "crh:ai": {
+            "coef": 0.073,
+            "ci95": [
+              -1.492,
+              1.638
+            ],
+            "p": 0.927
+          },
+          "n_judged": {
+            "coef": -0.49,
+            "ci95": [
+              -0.983,
+              0.002
+            ],
+            "p": 0.0508
+          },
+          "n": 190
+        }
+      },
+      "C4": {
+        "W1": {
+          "n_notes": 12,
+          "n_links": 21,
+          "link_supported": 0.3333
+        },
+        "W2": {
+          "n_notes": 15,
+          "n_links": 24,
+          "link_supported": 0.25
+        },
+        "W3": {
+          "n_notes": 15,
+          "n_links": 28,
+          "link_supported": 0.25
+        },
+        "W4": {
+          "n_notes": 12,
+          "n_links": 22,
+          "link_supported": 0.2273
+        },
+        "W5": {
+          "n_notes": 9,
+          "n_links": 15,
+          "link_supported": 0.2
+        },
+        "W6": {
+          "n_notes": 12,
+          "n_links": 23,
+          "link_supported": 0.1739
+        },
+        "W7": {
+          "n_notes": 14,
+          "n_links": 25,
+          "link_supported": 0.12
+        },
+        "W8": {
+          "n_notes": 10,
+          "n_links": 20,
+          "link_supported": 0.05
+        },
+        "scope": "all strata, judgeable AI notes, writers with >=5"
+      },
+      "C5": {
+        "early": {
+          "n_ai_notes": 29,
+          "ai": {
+            "est": 0.75,
+            "ci95": [
+              0.5143,
+              0.9231
+            ]
+          },
+          "human": {
+            "est": 0.6875,
+            "ci95": [
+              0.4615,
+              0.9
+            ]
+          }
+        },
+        "late": {
+          "n_ai_notes": 46,
+          "ai": {
+            "est": 0.75,
+            "ci95": [
+              0.5961,
+              0.9032
+            ]
+          },
+          "human": {
+            "est": 0.8,
+            "ci95": [
+              0.6591,
+              0.9231
+            ]
+          }
+        }
+      },
+      "C6": {
+        "english": {
+          "est": 0.7721,
+          "ci95": [
+            0.6973,
+            0.8401
+          ]
+        },
+        "non_english": {
+          "est": 0.7922,
+          "ci95": [
+            0.6923,
+            0.8875
+          ]
+        },
+        "n": {
+          "en": 235,
+          "other": 65
+        }
+      },
+      "sensitivity_archived_only": {
+        "link_level_unsupported": {
+          "all": {
+            "est": 0.7527,
+            "ci95": [
+              0.618,
+              0.8625
+            ]
+          },
+          "ai": {
+            "est": 0.7846,
+            "ci95": [
+              0.617,
+              0.9032
+            ]
+          },
+          "human": {
+            "est": 0.6786,
+            "ci95": [
+              0.4762,
+              0.8846
+            ]
+          },
+          "ai_minus_human": {
+            "est": 0.106,
+            "ci95": [
+              -0.1575,
+              0.3509
+            ]
+          }
+        },
+        "n_judged_links": {
+          "ai": 65,
+          "human": 28
+        }
+      }
+    }
+  }
+}

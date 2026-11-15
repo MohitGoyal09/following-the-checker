@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gold labels</title>
+<style>
+  :root { --bg:#fafaf8; --fg:#1d1d1b; --mute:#6b6b66; --line:#dcdcd6; --card:#fff; --accent:#2f5d8a; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#161615; --fg:#ececea; --mute:#9a9a94; --line:#33332f; --card:#1f1f1d; --accent:#8fb6dc; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui, sans-serif; }
+  header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); padding:12px 16px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  main { max-width:860px; margin:0 auto; padding:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px; margin:0 0 16px; }
+  .claim { font-weight:600; margin:4px 0 8px; }
+  .page { white-space:pre-wrap; max-height:340px; overflow:auto; border:1px solid var(--line); border-radius:6px; padding:10px; font-size:13px; color:var(--fg); }
+  .meta { color:var(--mute); font-size:12px; word-break:break-all; }
+  label.opt { display:inline-flex; gap:6px; margin:8px 14px 0 0; cursor:pointer; }
+  textarea { width:100%; box-sizing:border-box; margin-top:8px; background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; }
+  button { background:var(--accent); color:var(--bg); border:0; border-radius:6px; padding:8px 12px; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--fg); border:1px solid var(--line); }
+  button:focus-visible, input:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .done { border-left:4px solid var(--accent); }
+  .rules { color:var(--mute); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <strong>Gold labels</strong>
+  <label>Your name <input id="who" placeholder="e.g. mohit" size="10"></label>
+  <button class="ghost" id="tabS">Support (S)</button>
+  <button class="ghost" id="tabC">Claim check (C)</button>
+  <button class="ghost" id="tabP">Passage (P)</button>
+  <span id="progress" class="meta"></span>
+  <button id="export">Export CSV</button>
+</header>
+<main>
+  <section id="rulesS" class="rules">
+    <p><b>Support task.</b> Read the CLAIM and the PAGE TEXT. Use only the page text, not what you know.
+    <b>supports</b>: the page states the key facts, or they follow directly · <b>partial</b>: some key facts, or a weaker version ·
+    <b>silent</b>: the page does not address it (also cookie walls, menus, junk) · <b>contradicts</b>: the page states something incompatible.
+    Label alone. Do not discuss with your teammate until both of you have exported.</p>
+  </section>
+  <section id="rulesC" class="rules" hidden>
+    <p><b>Claim check.</b> Does the EXTRACTED CLAIM keep the main factual claim of the NOTE, without changing its meaning,
+    strength (hedging) or key facts (names, numbers, dates)? Mark <b>correct</b> or <b>incorrect</b>, and say why if incorrect.</p>
+  </section>
+  <section id="rulesP" class="rules" hidden>
+    <p><b>Passage task.</b> The same four labels as the support task, but judge only the PASSAGE shown (a short window of the page),
+    not the full page and not what you know. Label alone.</p>
+  </section>
+  <div id="list"></div>
+</main>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+  const DATA = JSON.parse(document.getElementById("data").textContent);
+  const OPTS = { S: ["supports", "partial", "silent", "contradicts"], C: ["correct", "incorrect"], P: ["supports", "partial", "silent", "contradicts"] };
+  const SETS = { S: "support", C: "claims", P: "passages" };
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  let tab = "S";
+  const who = document.getElementById("who");
+  // Labels live in memory first; localStorage is only a backup (it can be blocked), so Export always works.
+  const MEM = {};
+  const key = () => "gold:" + (who.value || "anon");
+  const store = () => {
+    if (!MEM[key()]) { try { MEM[key()] = JSON.parse(localStorage.getItem(key()) || "{}"); } catch { MEM[key()] = {}; } }
+    return MEM[key()];
+  };
+  const save = (s) => { MEM[key()] = s; try { localStorage.setItem(key(), JSON.stringify(s)); } catch { warn(); } };
+  const warn = () => { const p = document.getElementById("progress"); if (!p.dataset.warned) { p.dataset.warned = 1; alert("Browser storage is blocked: labels are kept only while this tab is open. Export CSV before closing."); } };
+  try { who.value = localStorage.getItem("gold:who") || ""; } catch {}
+  who.addEventListener("change", () => { try { localStorage.setItem("gold:who", who.value); } catch {} render(); });
+
+  function render() {
+    const s = store(), list = document.getElementById("list");
+    list.replaceChildren();
+    document.getElementById("rulesS").hidden = tab !== "S";
+    document.getElementById("rulesC").hidden = tab !== "C";
+    document.getElementById("rulesP").hidden = tab !== "P";
+    const items = DATA[SETS[tab]];
+    items.forEach((it) => {
+      const card = el("div", "card" + (s[it.item]?.label ? " done" : ""));
+      card.append(el("div", "meta", it.item));
+      if (tab !== "C") {
+        card.append(el("div", "meta", "CLAIM"), el("div", "claim", it.claim));
+        card.append(el("div", "meta", (tab === "S" ? "PAGE TEXT" : "PASSAGE") + " (from " + it.url + ")"), el("div", "page", it.text));
+      } else {
+        card.append(el("div", "meta", "NOTE"), el("div", "page", it.summary));
+        card.append(el("div", "meta", "EXTRACTED CLAIM"), el("div", "claim", it.claim));
+      }
+      const row = el("div");
+      OPTS[tab].forEach((o) => {
+        const lab = el("label", "opt"), r = el("input");
+        r.type = "radio"; r.name = it.item; r.value = o; r.checked = s[it.item]?.label === o;
+        r.addEventListener("change", () => { const t = store(); t[it.item] = { ...(t[it.item] || {}), label: o }; save(t); card.classList.add("done"); progress(); });
+        lab.append(r, el("span", null, o)); row.append(lab);
+      });
+      const note = el("textarea"); note.rows = 1; note.placeholder = "optional note"; note.value = s[it.item]?.note || "";
+      note.addEventListener("input", () => { const t = store(); t[it.item] = { ...(t[it.item] || {}), note: note.value }; save(t); });
+      card.append(row, note);
+      list.append(card);
+    });
+    progress();
+  }
+  function progress() {
+    const s = store(), n = (arr) => arr.filter((it) => s[it.item]?.label).length;
+    document.getElementById("progress").textContent =
+      `S ${n(DATA.support)}/${DATA.support.length} · C ${n(DATA.claims)}/${DATA.claims.length} · P ${n(DATA.passages)}/${DATA.passages.length}`;
+  }
+  document.getElementById("tabS").onclick = () => { tab = "S"; render(); };
+  document.getElementById("tabC").onclick = () => { tab = "C"; render(); };
+  document.getElementById("tabP").onclick = () => { tab = "P"; render(); };
+  document.getElementById("export").onclick = () => {
+    const s = store(), q = (v) => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+    const rows = [["labeller", "item", "label", "note"]];
+    [...DATA.support, ...DATA.claims, ...DATA.passages].forEach((it) => rows.push([who.value, it.item, s[it.item]?.label, s[it.item]?.note]));
+    const blob = new Blob([rows.map((r) => r.map(q).join(",")).join("\n")], { type: "text/csv" });
+    const a = el("a"); a.href = URL.createObjectURL(blob); a.download = `gold_labels_${who.value || "anon"}.csv`; a.click();
+  };
+  render();
+</script>
+</body>
+</html>

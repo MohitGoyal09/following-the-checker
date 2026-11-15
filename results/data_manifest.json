@@ -1,0 +1,51 @@
+{
+  "written_at": "2026-11-15T07:09:33+00:00",
+  "snapshot": "2026/11/15",
+  "snapshot_url_pattern": "https://ton.twimg.com/birdwatch-public-data/2026/11/15/{table}/{table}-00000.zip",
+  "sample_params": {
+    "SINCE": "2025-09-01",
+    "N_PAIRS": 100,
+    "N_CONTRAST_EACH": 50,
+    "MAX_LINKS_PER_NOTE": 5,
+    "SEED": 42
+  },
+  "python": "3.13.13",
+  "files": [
+    {
+      "path": "data/raw/notes-00000.tsv",
+      "bytes": 1627695181,
+      "lines": 3241775,
+      "sha256": "c5e3c774639355ed619d2e71742cf55dd3f33615905ab333fbd75a051daf4547"
+    },
+    {
+      "path": "data/raw/noteStatusHistory-00000.tsv",
+      "bytes": 937714019,
+      "lines": 3527827,
+      "sha256": "be87d24b5a0630bf63021cc3b763484d99490a6654f211d9546261c677992d82"
+    },
+    {
+      "path": "data/raw/userEnrollment-00000.tsv",
+      "bytes": 160638804,
+      "lines": 1518074,
+      "sha256": "dd1f4a5c941f5ccc5988d4ddc12421a4f34ee771d9e2dc0fc4baefa5abe50df2"
+    },
+    {
+      "path": "data/processed/sample_notes.csv",
+      "bytes": 133997,
+      "lines": 301,
+      "sha256": "a5e23db9f5010cb1c76ba4f1abb95f974c8983c36c570ae07ebfda148255b98c"
+    },
+    {
+      "path": "data/processed/sample_links.csv",
+      "bytes": 50395,
+      "lines": 481,
+      "sha256": "8b03debb4ee0976b99395906af4c9df2c8c0115785bdfe07bfd1228d7493bfab"
+    },
+    {
+      "path": "data/processed/links.jsonl",
+      "bytes": 1821065,
+      "lines": 443,
+      "sha256": "0208e5b303ebc956c594bb45a010653d595789454c68be30f1303e57b28dd013"
+    }
+  ]
+}

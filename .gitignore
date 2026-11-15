@@ -1,0 +1,21 @@
+__pycache__/
+.venv/
+.env
+*.pyc
+.pytest_cache/
+# raw snapshot: public and large; page text (links*.jsonl, wayback.jsonl, llm_calls.jsonl, label_*.html): third-party content
+data/raw/
+data/processed/*
+!data/processed/sample_notes.csv
+!data/processed/sample_links.csv
+!data/processed/claims.csv
+!data/processed/rater_tags.csv
+!data/processed/tag_drift_monthly.csv
+!data/processed/study_b_responses.csv
+!data/processed/verdicts_audit_*.csv
+!data/processed/verdicts_claude-opus-5-5.csv
+!data/processed/verdicts_gemini-3.8-flash.csv
+!data/processed/study_b_items.csv
+!data/processed/gold/
+data/processed/gold/*
+!data/processed/gold/*.csv
