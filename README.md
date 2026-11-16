@@ -1,5 +1,7 @@
 # False Assurance
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24272376.svg)](https://doi.org/10.5281/zenodo.24272376)
+
 **How AI readers use source-check verdicts on Community Notes**
 
 Mohit Goyal · Ananya Bhattacharya — [Apart Research AI x Epistemics Research Sprint](https://apartresearch.com/sprints/ai-x-epistemics-research-sprint-2026-11-13-to-2026-11-15), November 2026
@@ -104,7 +106,8 @@ Download the public Community Notes snapshot of Nov 15, 2026 into `data/raw/` fr
   author       = {Goyal, Mohit and Bhattacharya, Ananya},
   year         = {2026},
   howpublished = {Apart Research AI x Epistemics Research Sprint},
-  url          = {https://github.com/MohitGoyal09/following-the-checker}
+  doi          = {10.5281/zenodo.24272376},
+  url          = {https://doi.org/10.5281/zenodo.24272376}
 }
 ```
 

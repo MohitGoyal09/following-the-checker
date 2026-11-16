@@ -9,6 +9,7 @@ authors:
     given-names: Ananya
 date-released: 2026-11-16
 version: 1.0.0
+doi: "10.5281/zenodo.24272376"
 license: MIT
 repository-code: "https://github.com/MohitGoyal09/following-the-checker"
 url: "https://github.com/MohitGoyal09/following-the-checker"
@@ -40,3 +41,4 @@ preferred-citation:
   institution:
     name: "Apart Research AI x Epistemics Research Sprint"
   url: "https://github.com/MohitGoyal09/following-the-checker"
+  doi: "10.5281/zenodo.24272376"
