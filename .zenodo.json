@@ -1,0 +1,24 @@
+{
+  "title": "False Assurance: How AI Readers Use Source-Check Verdicts on Community Notes",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Goyal, Mohit"
+    },
+    {
+      "name": "Bhattacharya, Ananya"
+    }
+  ],
+  "description": "<p>Community Notes checks whether a note looks sourced, not whether the cited page supports the claim. We test how three chat LLMs (Claude Opus 5.5, Claude Haiku 5.5, Gemini 3.8 Flash) use a source-check verdict that can be wrong, with and without the passage the checker read, on 80 real Helpful notes (1,920 answers). With a verdict only, the readers inherited the checker's errors; the checked passage protected against false alarms but rarely against false assurances. A page-level check of 200 paired AI-written and human-written Helpful notes found that 52 to 68% of readable cited pages do not fully support the claim.</p><p>This release contains the report (paper/report.pdf), code, prompts, tests, preregistration with dated amendments, result files and public data. Apart Research AI x Epistemics Research Sprint, November 2026.</p>",
+  "license": "MIT",
+  "keywords": [
+    "community notes",
+    "fact-checking",
+    "LLM evaluation",
+    "source verification",
+    "trust signals",
+    "AI safety"
+  ],
+  "version": "1.0.0",
+  "publication_date": "2026-11-16"
+}

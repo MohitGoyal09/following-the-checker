@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "False Assurance: How AI Readers Use Source-Check Verdicts on Community Notes"
+type: software
+authors:
+  - family-names: Goyal
+    given-names: Mohit
+  - family-names: Bhattacharya
+    given-names: Ananya
+date-released: 2026-11-16
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/MohitGoyal09/following-the-checker"
+url: "https://github.com/MohitGoyal09/following-the-checker"
+abstract: >-
+  Community Notes checks whether a note looks sourced, not whether the cited page
+  supports the claim. We test how three chat LLMs (Claude Opus 5.5, Claude Haiku 5.5,
+  Gemini 3.8 Flash) use a source-check verdict that can be wrong, with and without the
+  passage the checker read, on 80 real Helpful notes (1,920 answers), and we check at
+  the page level whether the links in 200 paired AI-written and human-written Helpful
+  notes support their claims. Code, data, preregistration and report from the Apart
+  Research AI x Epistemics Research Sprint, November 2026.
+keywords:
+  - community notes
+  - fact-checking
+  - LLM evaluation
+  - source verification
+  - trust signals
+  - AI safety
+preferred-citation:
+  type: report
+  title: "False Assurance: How AI Readers Use Source-Check Verdicts on Community Notes"
+  authors:
+    - family-names: Goyal
+      given-names: Mohit
+    - family-names: Bhattacharya
+      given-names: Ananya
+  year: 2026
+  month: 11
+  institution:
+    name: "Apart Research AI x Epistemics Research Sprint"
+  url: "https://github.com/MohitGoyal09/following-the-checker"
